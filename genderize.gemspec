@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Genderize::VERSION
   s.authors     = ["Bodacious"]
   s.email       = ["bodacious@katanacode.com"]
-  s.homepage    = "http://github.com/KatanaCode/genderize"
+  s.homepage    = "http://katanacode.github.io/genderize/"
   s.license     = "MIT"
   s.summary     = "A helpful class for gender-specific models in Ruby applications"
   s.description = "A helpful class for gender-specific models in Ruby applications. Genderize adds useful helper methods for various pronouns and other written forms of male and female genders."
