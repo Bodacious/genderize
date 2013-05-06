@@ -1,0 +1,23 @@
+en:
+  genderize:
+    name:
+      masculine: "male"
+      feminine: "female"
+        
+  # pronouns
+    subject:
+      masculine: 'he'
+      feminine: 'she'
+    
+    object:
+      masculine: 'him'
+      feminine: 'her'
+      
+    possessive:
+      masculine: 'his'
+      feminine: 'her'
+    
+    # Other forms
+    casual:
+      masculine: guy
+      feminine: girl
