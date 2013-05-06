@@ -2,48 +2,63 @@ module Genderize
   class Gender
   
     include I18n
-
-    attr_reader :name, :abbr, :subject, :object, :possessive, :casual
-
+    
+    attr_reader :abbr
+    
     def initialize(abbr)
-      raise "Invalid abbreviation" unless abbr.to_s =~ /\A(f|m)\Z/i
-      @abbr = abbr.downcase
-      @male = self.abbr == 'm'
-      @name = male? ? t("name") : t("name", "feminine")
+      raise "Invalid abbreviation: '#{abbr}'" unless abbr.blank? or abbr.to_s =~ /\A(f|m)\Z/i
+      @abbr = abbr.blank? ? nil : abbr.to_s.downcase
+    end
     
-      # pronouns
-      @subject    = male? ? t("subject") : t("subject", "feminine")
-      @object     = male? ? t("object") : t("object", "feminine")
-      @possessive = male? ? t("possessive") : t("possessive", "feminine")
-    
-      # Other forms
-      @casual     = male? ? t("casual") : t("casual", "feminine")
+    def name
+      @name ||= translation_for("name")
     end
   
+    def subject
+      @subject ||= translation_for("subject")
+    end
+    
+    def object
+      @object ||= translation_for("object")
+    end
+    
+    def possessive
+      @possessive ||= translation_for("possessive")
+    end
+    
+    def casual
+      @casual ||= translation_for("casual")
+    end
+    
     def capital_abbr
       abbr.capitalize
     end
   
     def male?
-      @male
+      abbr == 'm'
     end
   
     def female?
-      !male?
+      abbr == 'f'
     end
   
     def to_s
-      @abbr
+      abbr
     end
   
     def ==(val)
-      to_s == val.to_s
+      abbr.to_s == val.to_s
     end
   
     private
-  
-    def t(attribute, gender = "masculine")
-      I18n.t("genderize.#{attribute}.#{gender}")
+    
+    def translation_for(key)
+      case
+      when male? then I18n.t("genderize.#{key}.masculine")
+      when female? then I18n.t("genderize.#{key}.feminine")
+      else
+        nil
+      end
     end
     
   end

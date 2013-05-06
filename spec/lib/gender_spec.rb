@@ -4,6 +4,7 @@ describe Genderize::Gender do
   
   let(:female) { Gender.new("f") }
   let(:male) { Gender.new("M") }  
+  let(:blank) { Gender.new('') }
   
   describe :name do
     
@@ -22,6 +23,15 @@ describe Genderize::Gender do
       end
       
     end
+    
+    context "when blank" do
+      
+      it "should be nil" do
+        blank.name.should be_nil
+      end
+      
+    end
+    
     
   end
   
@@ -42,6 +52,15 @@ describe Genderize::Gender do
       end
       
     end
+    
+    context "when blank" do
+      
+      it "should be nil" do
+        blank.abbr.should be_nil
+      end
+      
+    end
+    
   
   end
   
@@ -62,6 +81,15 @@ describe Genderize::Gender do
       end
       
     end
+    
+    context "when blank" do
+      
+      it "should be nil" do
+        blank.subject.should be_nil
+      end
+      
+    end
+    
   end
   
   describe  :object do
@@ -78,6 +106,14 @@ describe Genderize::Gender do
       
       it "should be 'her'" do
         female.object.should eql("her")
+      end
+      
+    end
+
+    context "when blank" do
+      
+      it "should be nil" do
+        blank.object.should be_nil
       end
       
     end
@@ -103,6 +139,15 @@ describe Genderize::Gender do
       
     end
     
+    context "when blank" do
+      
+      it "should be nil" do
+        blank.possessive.should be_nil
+      end
+      
+    end
+    
+    
   
   end
   
@@ -123,6 +168,15 @@ describe Genderize::Gender do
       end
       
     end
+    
+    context "when blank" do
+      
+      it "should be nil" do
+        blank.casual.should be_nil
+      end
+      
+    end
+    
     
   end
   
@@ -153,12 +207,14 @@ describe Genderize::Gender do
     
     it "should return true if passed abbr value" do
       (male == "m").should be_true
-      (female == "f").should be_true      
+      (female == "f").should be_true 
+      (blank == nil).should be_true     
     end
 
     it "should return false if not passed abbr value" do
       (male == "f").should be_false
       (female == 1).should be_false
+      (blank == "$").should be_false           
     end
     
   end
