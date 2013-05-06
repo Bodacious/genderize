@@ -26,7 +26,7 @@ Genderize is a simple Rails gem for adding gender helper methods to Rails models
   
 ## Installation
 
-Add this to your Gemfile
+Add this to your Gemfile:
 
 
     gem "genderize"
@@ -39,7 +39,7 @@ Next, run:
 
 ... to install the genderize.en.yml file in your locales directory
 
-Finally, to **genderize** a model attribute:
+Finally, to *genderize* a model attribute:
 
 
     class User < ActiveRecord::Base
@@ -52,9 +52,9 @@ Finally, to **genderize** a model attribute:
     end
 
 
-    ## Issues
+## Issues
 
-If you discover a problem with Blogit, please let us know about it.
+If you discover a problem with Genderize, please let us know about it.
 
 **Remember** to search the [issues list](https://github.com/KatanaCode/genderize/issues) first in case your issue has already been raised
 by another Githuber
