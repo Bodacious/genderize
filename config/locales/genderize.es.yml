@@ -1,0 +1,23 @@
+es:
+  genderize:
+    name:
+      masculine: "hombre"
+      feminine: "mujer"
+        
+  # pronouns
+    subject:
+      masculine: 'él'
+      feminine: 'ella'
+    
+    object:
+      masculine: 'él'
+      feminine: 'ella'
+      
+    possessive:
+      masculine: 'suyo'
+      feminine: 'suya'
+    
+    # Other forms
+    casual:
+      masculine: chico
+      feminine: chica
