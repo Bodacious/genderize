@@ -6,6 +6,16 @@ describe Genderize::Gender do
   let(:male) { Gender.new("M") }  
   let(:blank) { Gender.new('') }
   
+  context "when full gender name is used" do
+    
+    it "should find the correct abbreviation" do
+      Gender.new("female").abbr.should eql('f')
+      Gender.new("male").abbr.should eql('m')
+    end
+    
+  end
+  
+  
   describe :name do
     
     context "when male" do

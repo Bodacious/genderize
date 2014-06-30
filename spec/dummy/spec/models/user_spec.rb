@@ -21,6 +21,14 @@ describe User do
     
   end
   
+  describe "full gender names" do
+    
+    it 'should set the gender as the abbreviation' do
+      User.new(gender: "female").gender.should be_female
+      User.new(gender: "male").gender.should be_male
+    end
+    
+  end
   # Since the db column name can be changed, we're using the "name" column to
   # test this behaviour
   describe "name" do
