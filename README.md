@@ -71,7 +71,7 @@ You're welcome to contribute to Genderize.
 
 Copyright 2013 [Katana Code Ltd.](http://katanacode.com)
 
-See (LEGAL)[LEGAL] for full details.
+See [LEGAL](LEGAL) for full details.
 
 ## Credits
 
