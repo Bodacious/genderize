@@ -18,8 +18,11 @@ Gem::Specification.new do |s|
   
   s.test_files = Dir["spec/**/*"]
 
-  s.add_dependency "rails", ">= 3.2.13"
+  s.add_dependency "rails", ">= 4.2.0"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "spring"  
+  s.add_development_dependency "rspec-rainbow"
+  s.add_development_dependency "pry"
 end
