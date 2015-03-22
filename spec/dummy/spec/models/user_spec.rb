@@ -4,52 +4,139 @@ describe User do
   
   describe "gender" do
     
-    let(:user) { User.new(gender: "f") }
+    let(:user) { User.new }
       
-    it "should return a Gender object" do
-      user.gender.should be_an_instance_of(Gender)
+    context "when gender is set to a valid value" do
+
+      before do
+        user.gender = %w[ f m female male ].sample
+      end
+      
+      it "returns a Gender object" do
+        expect(user.gender).to be_an_instance_of(Gender)
+      end
+      
     end
     
-    it "should be female?" do
-      user.gender.should be_female
+    context "when gender is set to an empty string" do
+
+      before do
+        user.gender = ''
+      end
+      
+      it "returns an unknown gender" do
+        expect(user.gender).to be_unknown
+      end
+      
     end
     
-    it "should be male when changed" do
-      user.gender = "m"
-      user.gender.should be_male
+    context "when gender is set to nil" do
+
+      before do
+        user.gender = nil
+      end
+      
+      it "returns an unknown gender" do
+        expect(user.gender).to be_unknown
+      end
+      
+    end
+    
+    context "when gender is set to 'f'" do
+      
+      before do
+        user.gender = 'f'
+      end
+            
+      it "is female?" do
+        expect(user.gender).to be_female
+      end
+      
+    end
+    
+    context "when gender is set to 'm'" do
+      
+      before do
+        user.gender = "m"
+      end
+      
+      it "is male?" do
+        expect(user.gender).to be_male
+      end
+
+    end
+    
+    context "when gender is set to :male" do
+
+      before do
+        user.gender = :male
+      end
+      
+      it "is male?" do
+        expect(user.gender).to be_male
+      end
+      
+    end
+
+    context "when gender is set to :m" do
+
+      before do
+        user.gender = :m
+      end
+      
+      it "is male?" do
+        expect(user.gender).to be_male
+      end
+      
+    end
+    
+    context "when gender is set to :female" do
+
+      before do
+        user.gender = :female
+      end
+      
+      it "is female?" do
+        expect(user.gender).to be_female
+      end
+      
+    end
+
+    context "when gender is set to :f" do
+
+      before do
+        user.gender = :f
+      end
+      
+      it "is female?" do
+        expect(user.gender).to be_female
+      end
+      
     end
     
   end
   
-  describe "full gender names" do
-    
-    it 'should set the gender as the abbreviation' do
-      User.new(gender: "female").gender.should be_female
-      User.new(gender: "male").gender.should be_male
-    end
-    
-  end
   # Since the db column name can be changed, we're using the "name" column to
   # test this behaviour
   describe "name" do
     
-    let(:user) { User.new(name: "f", gender: "f") }
+    let(:user) { User.new(name: "f", gender: '') }
     
-    it "should return a Gender object" do
-      user.name.should be_an_instance_of Gender
+    it "returns a Gender object" do
+      expect(user.name).to be_an_instance_of Gender
     end
     
-    it "should change the name column" do
+    it "changes the DB row in the name column" do
       user.save!
       user = User.last
-      user.name.should == "f"
-      user.name.should be_female
+      expect(user.send(:read_attribute, :name)).to eql("f")
+      expect(user.name).to be_female
     end
     
     it "should not change the gender column" do
       user.name = "m"
-      user.name.should be_male
-      user.gender.should_not be_male
+      expect(user.name).to be_male
+      expect(user.gender).to be_unknown
     end
     
   end

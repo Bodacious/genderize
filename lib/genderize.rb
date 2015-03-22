@@ -29,7 +29,8 @@ module Genderize
         if read_value.blank?
           return read_value
         else
-          instance_variable_set("@#{col_name}", Genderize::Gender.new(read_attribute(col_name)))
+          instance_variable_set("@#{col_name}", 
+            Genderize::Gender.new(read_attribute(col_name)))
         end
       end
       
@@ -41,19 +42,17 @@ module Genderize
       # Raises ArgumentError if gender is not a single alphanumeric character "m" or "f"
       define_method "#{col_name}=" do |string|
         string = string.to_s.first
-        unless string.to_s =~ /\A(m|f)\Z/i
+        if string.to_s !~ /\A(|m|f)\Z/i
           raise ArgumentError, "Gender must be a single alphanumeric character" 
         end
-        write_attribute(col_name, string)
         
-        if string.blank?
-          instance_variable_set("@#{col_name}", string)
-        else
-          instance_variable_set("@#{col_name}", Genderize::Gender.new(read_attribute(col_name)))
-        end
+        write_attribute(col_name, string)
+        set_value = Genderize::Gender.new(read_attribute(col_name))
+        instance_variable_set("@#{col_name}", set_value)
       end
       
     end
     
   end
+  
 end
