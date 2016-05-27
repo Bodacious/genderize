@@ -5,9 +5,10 @@ require File.expand_path("../dummy/config/environment", __FILE__)
 require 'rspec/rails'
 require "support/deferred_garbage_collection"
 
-include Genderize
+require "genderize"
+include Genderize # make the Gender class available in specs
 
 RSpec.configure do |config|
   config.before(:all) { DeferredGarbageCollection.start }
-  config.after(:all) { DeferredGarbageCollection.reconsider }
+  config.after(:all)  { DeferredGarbageCollection.reconsider }
 end
