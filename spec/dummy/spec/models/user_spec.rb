@@ -1,57 +1,63 @@
 require 'spec_helper'
 
-describe User do
-  
+describe User, type: :model do
+
   describe "gender" do
-    
+
     let(:user) { User.new(gender: "f") }
-      
+
     it "should return a Gender object" do
-      user.gender.should be_an_instance_of(Gender)
+      expect(user.gender).to be_an_instance_of(Genderize::Gender)
     end
-    
+
     it "should be female?" do
-      user.gender.should be_female
+      expect(user.gender).to be_female
     end
-    
+
     it "should be male when changed" do
       user.gender = "m"
-      user.gender.should be_male
+      expect(user.gender).to be_male
     end
-    
+
+    it "should be blank when changed" do
+      user.gender = ""
+      expect(user.gender).to be_empty
+    end
+
   end
-  
+
   describe "full gender names" do
-    
+
     it 'should set the gender as the abbreviation' do
-      User.new(gender: "female").gender.should be_female
-      User.new(gender: "male").gender.should be_male
+      expect(User.new(gender: "female").gender).to be_female
+      expect(User.new(gender: "male").gender).to   be_male
+      expect(User.new(gender: "").gender).to       be_blank
     end
-    
+
   end
   # Since the db column name can be changed, we're using the "name" column to
   # test this behaviour
   describe "name" do
-    
+
     let(:user) { User.new(name: "f", gender: "f") }
-    
+
     it "should return a Gender object" do
-      user.name.should be_an_instance_of Gender
+      expect(user.name).to be_an_instance_of Genderize::Gender
     end
-    
+
     it "should change the name column" do
       user.save!
       user = User.last
-      user.name.should == "f"
-      user.name.should be_female
+      expect(user.name).to eq("f")
+      expect(user.name).to be_female
     end
-    
+
     it "should not change the gender column" do
       user.name = "m"
-      user.name.should be_male
-      user.gender.should_not be_male
+      expect(user.name).to be_male
+      expect(user.gender).not_to be_male
     end
-    
+
   end
-  
+
 end
