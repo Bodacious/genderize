@@ -3,21 +3,26 @@ es:
     name:
       masculine: "hombre"
       feminine: "mujer"
-        
+      blank: ""
+
   # pronouns
     subject:
       masculine: 'él'
       feminine: 'ella'
-    
+      blank: ""
+
     object:
       masculine: 'él'
       feminine: 'ella'
-      
+      blank: ""
+
     possessive:
       masculine: 'suyo'
       feminine: 'suya'
-    
+      blank: ""
+
     # Other forms
     casual:
       masculine: chico
       feminine: chica
+      blank: ""

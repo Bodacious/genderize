@@ -3,21 +3,26 @@ en:
     name:
       masculine: "male"
       feminine: "female"
-        
+      blank: ""
+
   # pronouns
     subject:
       masculine: 'he'
       feminine: 'she'
-    
+      blank: "they"
+
     object:
       masculine: 'him'
       feminine: 'her'
-      
+      blank: "them"
+
     possessive:
       masculine: 'his'
       feminine: 'her'
-    
+      blank: "their"
+
     # Other forms
     casual:
       masculine: guy
       feminine: girl
+      blank: person
