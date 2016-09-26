@@ -85,7 +85,7 @@ Genderize is a simple Rails gem for adding gender helper methods to Rails models
 
 ## Changing these values
 
-You can change the values for each of the methods described above by modifying your locales file. See [config/locales/en.yml](config/locales/en.yml) for more info.
+You can change the values for each of the methods described above by modifying your locales file. See [config/locales/en.yml](config/locales/genderize.en.yml) for more info.
 
 ## Installation
 
