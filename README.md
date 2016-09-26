@@ -134,7 +134,7 @@ You're welcome to contribute to Genderize.
 
 Copyright 2013 [Katana Code Ltd.](http://katanacode.com)
 
-See [LEGAL](MIT-LICENCSE) for full details.
+See [LEGAL](MIT-LICENSE) for full details.
 
 ## Credits
 
