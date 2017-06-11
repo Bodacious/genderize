@@ -4,26 +4,57 @@ describe User, type: :model do
 
   describe "gender" do
 
-    let(:user) { User.new(gender: "f") }
+    let(:user) { User.new(gender: gender) }
 
-    it "should return a Gender object" do
-      expect(user.gender).to be_an_instance_of(Genderize::Gender)
+    context "when female" do
+      let(:gender) { "f" }
+
+      it "should return a Gender object" do
+        expect(user.gender).to be_an_instance_of(Genderize::Gender)
+      end
+
+      it "should be female?" do
+        expect(user.gender).to be_female
+      end
     end
 
-    it "should be female?" do
-      expect(user.gender).to be_female
+    context "when male" do
+      let(:gender) { "m" }
+
+      it "should return a Gender object" do
+        expect(user.gender).to be_an_instance_of(Genderize::Gender)
+      end
+
+      it "should be male?" do
+        expect(user.gender).to be_male
+      end
     end
 
-    it "should be male when changed" do
-      user.gender = "m"
-      expect(user.gender).to be_male
+    context "when blank" do
+      let(:gender) { "" }
+
+      it "should return a Gender object" do
+        expect(user.gender).to be_an_instance_of(Genderize::Gender)
+      end
+
+      it "should be blank?" do
+        expect(user.gender).to be_blank
+      end
     end
 
-    it "should be blank when changed" do
-      user.gender = ""
-      expect(user.gender).to be_empty
-    end
+    context "when changed" do
+      let(:gender) { "f" }
 
+      it "should be male when changed" do
+        user.gender = "m"
+        expect(user.gender).to be_male
+      end
+
+      it "should be blank when changed" do
+        user.gender = ""
+        expect(user.gender).to be_blank
+      end
+    end
   end
 
   describe "full gender names" do
