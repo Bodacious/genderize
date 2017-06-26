@@ -40,11 +40,7 @@ module Genderize
         end
         write_attribute(col_name, string)
 
-        if string.blank?
-          instance_variable_set("@#{col_name}", string)
-        else
-          instance_variable_set("@#{col_name}", Genderize::Gender.new(read_attribute(col_name)))
-        end
+        instance_variable_set("@#{col_name}", Genderize::Gender.new(read_attribute(col_name)))
       end
 
     end
