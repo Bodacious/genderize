@@ -30,6 +30,18 @@ describe User, type: :model do
       end
     end
 
+    context "when non-binary" do
+      let(:gender) { "n" }
+
+      it "should return a Gender object" do
+        expect(user.gender).to be_an_instance_of(Genderize::Gender)
+      end
+
+      it "should be non_binary?" do
+        expect(user.gender).to be_non_binary
+      end
+    end
+
     context "when blank" do
       let(:gender) { "" }
 
@@ -62,6 +74,7 @@ describe User, type: :model do
     it 'should set the gender as the abbreviation' do
       expect(User.new(gender: "female").gender).to be_female
       expect(User.new(gender: "male").gender).to   be_male
+      expect(User.new(gender: "non-binary").gender).to be_non_binary
       expect(User.new(gender: "").gender).to       be_blank
     end
 

@@ -2,12 +2,14 @@
 
 Genderize is a simple Rails gem for adding gender helper methods to Rails models.
 
+_New:_ we now have non-binary as an option
+
 ## Example
 
 
 ### Feminine
 
-    # Setting the gender is simple - just set the attribute value to "m" or "f"
+    # Setting the gender is simple - just set the attribute value to "m", "n", or "f"
     @user = User.new(gender: "f")
 
     # This also works
@@ -15,6 +17,7 @@ Genderize is a simple Rails gem for adding gender helper methods to Rails models
 
     # This gives us a few helper methods to add gender specific text to our views
     @user.gender.male? # => false
+    @user.gender.non_binary? # => false
     @user.gender.name # => "female"
     @user.gender.to_s # => "f"
     @user.gender.abbr # => "f"
@@ -34,7 +37,7 @@ Genderize is a simple Rails gem for adding gender helper methods to Rails models
 
 ### Masculine
 
-    # Setting the gender is simple - just set the attribute value to "m" or "f"
+    # Setting the gender is simple - just set the attribute value to "m", "n", or "f"
     @user = User.new(gender: "m")
 
     # This also works
@@ -42,6 +45,7 @@ Genderize is a simple Rails gem for adding gender helper methods to Rails models
 
     # This gives us a few helper methods to add gender specific text to our views
     @user.gender.female? # => false
+    @user.gender.non_binary? # => false
     @user.gender.name # => "male"
     @user.gender.to_s # => "m"
     @user.gender.abbr # => "m"
@@ -58,6 +62,37 @@ Genderize is a simple Rails gem for adding gender helper methods to Rails models
 
     # Writing a casual form of the gender
     @user.gender.casual # => "guy"
+
+### Non-binary
+
+    # Setting the gender is simple - just set the attribute value to "m", "n", or "f"
+    @user = User.new(gender: "n")
+
+    # This also works
+    @user = User.new(gender: "non-binary")
+    @user = User.new(gender: "non_binary")
+    @user = User.new(gender: "non binary")
+
+    # This gives us a few helper methods to add gender specific text to our views
+    @user.gender.female? # => false
+    @user.gender.male? # => false
+    @user.gender.non_binary? # => true
+    @user.gender.name # => "non_binary"
+    @user.gender.to_s # => "n"
+    @user.gender.abbr # => "n"
+
+    # gender pronouns
+    # As the subject of a sentence
+    @user.gender.subject # => 'they'
+
+    # As the object of a sentence
+    @user.gender.object # => 'them'
+
+    # Showing possession
+    @user.gender.possessive # => 'their'
+
+    # Writing a casual form of the gender
+    @user.gender.casual # => "person"
 
 ### Blank (no gender specified)
 

@@ -2,16 +2,25 @@ require "spec_helper"
 
 describe Genderize::Gender do
 
-  let(:female) { Gender.new("f") }
-  let(:male)   { Gender.new("M") }
-  let(:blank)  { Gender.new('')  }
+  let(:female)     { Gender.new("f") }
+  let(:male)       { Gender.new("M") }
+  let(:non_binary) { Gender.new("n") }
+  let(:blank)      { Gender.new('')  }
 
   context "when full gender name is used" do
 
     it "should find the correct abbreviation" do
       expect(Gender.new("female").abbr).to eql('f')
       expect(Gender.new("male").abbr).to eql('m')
+      expect(Gender.new("non_binary").abbr).to eql('n')
       expect(Gender.new("").abbr).to eql('')
+    end
+
+    it "can match a dash, underscore, space, or no separator for non_binary" do
+      separators = ["-", "_", " ", ''].each do |separator|
+        name = "non#{separator}binary"
+        expect(Gender.new(name).abbr).to eql('n')
+      end
     end
 
   end
@@ -31,6 +40,14 @@ describe Genderize::Gender do
 
       it "should be 'female'" do
         expect(female.name).to eql("female")
+      end
+
+    end
+
+    context "when non_binary" do
+
+      it "should be 'non_binary" do
+        expect(non_binary.name).to eql("non_binary")
       end
 
     end
@@ -64,6 +81,14 @@ describe Genderize::Gender do
 
     end
 
+    context "when non_binary" do
+
+      it "should be 'n'" do
+        expect(non_binary.abbr).to eql("n")
+      end
+
+    end
+
     context "when blank" do
 
       it "should be ''" do
@@ -89,6 +114,14 @@ describe Genderize::Gender do
 
       it "should be 'she'" do
         expect(female.subject).to eql("she")
+      end
+
+    end
+
+    context "when non_binary" do
+
+      it "should be 'they'" do
+        expect(non_binary.subject).to eql("they")
       end
 
     end
@@ -121,6 +154,14 @@ describe Genderize::Gender do
 
     end
 
+    context "when non_binary" do
+
+      it "should be 'them'" do
+        expect(non_binary.object).to eql("them")
+      end
+
+    end
+
     context "when blank" do
 
       it "should be 'them'" do
@@ -146,6 +187,14 @@ describe Genderize::Gender do
 
       it "should be 'her'" do
         expect(female.possessive).to eql("her")
+      end
+
+    end
+
+    context "when non_binary" do
+
+      it "should be 'their'" do
+        expect(non_binary.possessive).to eql("their")
       end
 
     end
@@ -180,6 +229,14 @@ describe Genderize::Gender do
 
     end
 
+    context "when non_binary" do
+
+      it "should be 'person'" do
+        expect(non_binary.casual).to eql("person")
+      end
+
+    end
+
     context "when blank" do
 
       it "should be 'person'" do
@@ -194,15 +251,17 @@ describe Genderize::Gender do
   describe :to_s do
 
     it "should equal the abbr value" do
-      expect(male.to_s).to   eql(male.abbr)
-      expect(female.to_s).to eql(female.abbr)
-      expect(blank.to_s).to  eql(blank.abbr)
+      expect(male.to_s).to       eql(male.abbr)
+      expect(female.to_s).to     eql(female.abbr)
+      expect(non_binary.to_s).to eql(non_binary.abbr)
+      expect(blank.to_s).to      eql(blank.abbr)
     end
 
     it "returns a string" do
-      expect(male.to_s).to   be_an_instance_of(String)
-      expect(female.to_s).to be_an_instance_of(String)
-      expect(blank.to_s).to  be_an_instance_of(String)
+      expect(male.to_s).to       be_an_instance_of(String)
+      expect(female.to_s).to     be_an_instance_of(String)
+      expect(non_binary.to_s).to be_an_instance_of(String)
+      expect(blank.to_s).to      be_an_instance_of(String)
     end
 
   end
@@ -210,9 +269,10 @@ describe Genderize::Gender do
   describe :capital_abbr do
 
     it "should equal the abbr value capitalized" do
-      expect(male.capital_abbr).to   eql(male.abbr.capitalize)
-      expect(female.capital_abbr).to eql(female.abbr.capitalize)
-      expect(blank.capital_abbr).to  eql(blank.abbr.capitalize)
+      expect(male.capital_abbr).to       eql(male.abbr.capitalize)
+      expect(female.capital_abbr).to     eql(female.abbr.capitalize)
+      expect(non_binary.capital_abbr).to eql(non_binary.abbr.capitalize)
+      expect(blank.capital_abbr).to      eql(blank.abbr.capitalize)
     end
 
   end
@@ -222,6 +282,7 @@ describe Genderize::Gender do
     it "should return true if passed abbr value" do
       expect(male == "m").to be_truthy
       expect(female == "f").to be_truthy
+      expect(non_binary == "n").to be_truthy
       expect(blank == nil).to be_truthy
       expect(blank == '').to be_truthy
     end
@@ -229,6 +290,7 @@ describe Genderize::Gender do
     it "should return false if not passed abbr value" do
       expect(male == "f").to be_falsey
       expect(female == 1).to be_falsey
+      expect(non_binary == "").to be_falsey
       expect(blank == "$").to be_falsey
     end
 

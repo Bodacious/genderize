@@ -3,26 +3,31 @@ en:
     name:
       masculine: "male"
       feminine: "female"
+      non_binary: "non_binary"
       blank: ""
 
   # pronouns
     subject:
       masculine: 'he'
       feminine: 'she'
+      non_binary: they
       blank: "they"
 
     object:
       masculine: 'him'
       feminine: 'her'
+      non_binary: them
       blank: "them"
 
     possessive:
       masculine: 'his'
       feminine: 'her'
+      non_binary: their
       blank: "their"
 
     # Other forms
     casual:
       masculine: guy
       feminine: girl
+      non_binary: person
       blank: person
