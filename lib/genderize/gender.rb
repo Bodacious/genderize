@@ -4,13 +4,13 @@ module Genderize
     include I18n
 
     # Maps the gender abbreviation name to the full name for translation keys
-    ABR_KEY_NAME_MAPPING = { "" => "blank", "m" => "masculine", "f" => "feminine" }
+    ABR_KEY_NAME_MAPPING = { "" => "blank", "m" => "masculine", "f" => "feminine", "n" => "non_binary" }
 
 
     attr_reader :abbr
 
     def initialize(abbr)
-      unless abbr.blank? or abbr.to_s =~ /\A(f|m|female|male)\Z/i
+      unless abbr.blank? or abbr.to_s =~ /\A(f|m|n|female|male|non[ -_]?binary)\Z/i
         raise "Invalid abbreviation: '#{abbr}'"
       end
       @abbr = abbr.blank? ? '' : abbr.to_s.first.downcase
@@ -46,6 +46,10 @@ module Genderize
 
     def female?
       abbr == 'f'
+    end
+
+    def non_binary?
+      abbr == 'n'
     end
 
     def blank?
