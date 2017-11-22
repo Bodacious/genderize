@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130506080641) do
+ActiveRecord::Schema.define(version: 20171122004630) do
+
+  create_table "user_with_opts", force: :cascade do |t|
+    t.string   "gender"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name",       limit: 20, null: false
