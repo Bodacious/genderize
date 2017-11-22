@@ -52,6 +52,26 @@ describe User, type: :model do
       it "should be blank?" do
         expect(user.gender).to be_blank
       end
+
+      it "should keep the stored value as empty string" do
+        expect(user[:gender]).to eql("")
+      end
+    end
+
+    context "when null" do
+      let(:gender) { nil }
+
+      it "should return a Gender object" do
+        expect(user.gender).to be_an_instance_of(Genderize::Gender)
+      end
+
+      it "should be blank?" do
+        expect(user.gender).to be_blank
+      end
+
+      it "should keep the stored value as empty string" do
+        expect(user[:gender]).to eql("")
+      end
     end
 
     context "when changed" do

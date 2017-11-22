@@ -2,7 +2,9 @@
 
 Genderize is a simple Rails gem for adding gender helper methods to Rails models.
 
-_New:_ we now have non-binary as an option
+_New:_
+- (0.1.1) options to coerce invalid input to nil or to coerce empty string to nil
+- (0.1.0) we now have non-binary as an option
 
 ## Example
 
@@ -147,7 +149,17 @@ Finally, to *genderize* a model attribute:
       # ... or, if your db column isn't named `gender`
       genderize(:user_gender)
 
-    end
+      ### New opts (must specify column name to use)
+      # ... to prevent storing empty strings and store them as nil instead
+      genderize(:gender, no_empty_string: true)
+
+      # ... to coerce invalid arguments to nil rather than throwing ArgumentError
+      genderize(:gender, set_invalid_to_nil: true)
+
+      # ... these can be combined together
+      genderize(:gender, set_invalid_to_nil: true, no_empty_string: true)
+
+    end      
 
 
 ## Issues
