@@ -20,11 +20,15 @@ module Genderize
       #
       # The object is memoized for future calls.
       #
+      # col_name - String or Symbol name of gender column (default 'gender')
+      #
+      # opts - Hash options to handle storage and initialization scenarios:
+      #        :no_empty_string - Boolean. If true, stores empty string as nil
+      #        :set_invalid_to_nil - Boolean. If true, sets the gender to be 
+      #                              an unknown Gender instead of throwing an
+      #                              ArgumentError
+      #
       # Returns a Gender
-
-      # :no_empty_string ensures the empty_string is stored as nil
-      # :set_invalid_to_nil sets the gender to be blank instead of
-      #   throwing an ArgumentError
 
       no_empty_string = !!opts[:no_empty_string] || false
       set_invalid_to_nil = !!opts[:set_invalid_to_nil] || false
@@ -38,9 +42,10 @@ module Genderize
       # Writes to the DB column the new value for the gender attribute
       # Sets the instance varaible value too
       #
-      # string - A String indicating the gender. Must be either 'm', "M", 'f' or "F".
+      # string - A String indicating the gender. Valid parameters must have
+      #          first letter be 'm', 'n', 'f' or ''. Case insensitive.
       #
-      # Raises ArgumentError if gender is not a single alphanumeric character "m" or "f"
+      # Raises ArgumentError if gender isn't valid and set_invalid_to_nil is false
       define_method "#{col_name}=" do |string|
         string = string.to_s.first
         valid = string.to_s =~ /\A(m|f|n|)\Z/i
